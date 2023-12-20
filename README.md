@@ -6,7 +6,7 @@ Low Latency Servo Control via Serial
 
 ### How to run:  
 1. Upload the sketch to the Arduino
-2. Install pyserial: `pip install --user pyserial`
+2. Install dependencies: `pip install --user pyserial pyside6`
 3. Run the script: `python arduino_low_latency_servo_serial_control.py`
 
 ### Output:  

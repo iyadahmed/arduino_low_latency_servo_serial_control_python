@@ -9,7 +9,6 @@
 #define STRLEN(str) (sizeof(str) - 1)
 
 bool isWriteAngleCommandFound = false;
-int inByte = 0;
 uint8_t servoPos = 0;
 Servo servo;
 
@@ -26,9 +25,7 @@ void loop() {
   if (Serial.available() >= (STRLEN(SERVO_WRITE_ANGLE_COMMAND) + 1)) {
     isWriteAngleCommandFound = Serial.find(SERVO_WRITE_ANGLE_COMMAND, STRLEN(SERVO_WRITE_ANGLE_COMMAND));
     if (isWriteAngleCommandFound) {
-      inByte = Serial.read();
-      if (inByte == -1) return;  // Handle timeout
-      servoPos = (uint8_t)inByte;
+      servoPos = Serial.read(); // We do not need to handle timeout, if we already check that enough bytes are available via Serial.available()
       servo.write(servoPos);
       delay(SERVO_DELAY_MS);
     }

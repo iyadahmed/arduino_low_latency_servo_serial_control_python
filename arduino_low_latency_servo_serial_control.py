@@ -13,5 +13,4 @@ while True:
     if servo_pos < 0 or servo_pos > 180:
         print("Invalid servo position")
         continue
-    arduino.write(SERVO_WRITE_ANGLE_COMMAND)
-    arduino.write(servo_pos.to_bytes(1, 'big', signed=False))
+    arduino.write(SERVO_WRITE_ANGLE_COMMAND + bytes([servo_pos]))

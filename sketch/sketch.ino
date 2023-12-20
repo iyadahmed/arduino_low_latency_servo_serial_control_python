@@ -4,10 +4,12 @@
 #define SERVO_INIT_POS 0
 #define SERIAL_BAUD_RATE 9600
 #define SERVO_WRITE_ANGLE_COMMAND "WRITE_ANGLE"
+#define SERVO_DELAY_MS 15
 
 #define STRLEN(str) (sizeof(str) - 1)
 
 bool isWriteAngleCommandFound = false;
+int inByte = 0;
 uint8_t servoPos = 0;
 Servo servo;
 
@@ -21,17 +23,14 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available() >= 4) {
-    // isWriteAngleCommandFound = true;
-    isWriteAngleCommandFound = Serial.find("FOO", 3);
+  if (Serial.available() >= (STRLEN(SERVO_WRITE_ANGLE_COMMAND) + 1)) {
+    isWriteAngleCommandFound = Serial.find(SERVO_WRITE_ANGLE_COMMAND, STRLEN(SERVO_WRITE_ANGLE_COMMAND));
     if (isWriteAngleCommandFound) {
-      char b[4] = { 'a', 'b', 'c', 0 };
-      Serial.readBytes(b, 3);
-      b[3] = 0;
-      Serial.print(b);
-      // servoPos = Serial.read();
-      // servo.write(servoPos);
-      // delay(15);
+      inByte = Serial.read();
+      if (inByte == -1) return;  // Handle timeout
+      servoPos = (uint8_t)inByte;
+      servo.write(servoPos);
+      delay(SERVO_DELAY_MS);
     }
   }
 }

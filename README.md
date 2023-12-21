@@ -14,6 +14,11 @@ Low Latency Servo Control via Serial
 an infinite loop with the above message, entering an angle moves the servo accordingly
 
 ### Video:
+CLI (set the "GUI" constant in the script to False)
 
 https://github.com/iyadahmed/arduino_low_latency_servo_serial_control_python/assets/25552173/ddbada33-213b-4f00-947c-6a2e97e7058d
+
+GUI
+
+https://github.com/iyadahmed/arduino_low_latency_servo_serial_control_python/assets/25552173/f5428dc2-210b-46af-8dda-88187c0cbeb4
 
